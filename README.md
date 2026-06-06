@@ -53,6 +53,7 @@ This repository starts by defining the operating model before automation is intr
 - onboarding workflow documentation
 - offboarding workflow documentation
 - audit and logging documentation
+- lab setup documentation
 - user provisioning PowerShell script
 - user deprovisioning PowerShell script
 - group membership reporting PowerShell script
