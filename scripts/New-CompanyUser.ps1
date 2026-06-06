@@ -30,7 +30,7 @@ $Password = Read-Host "Enter initial password" -AsSecureString
 .\New-CompanyUser.ps1 -FirstName Alice -LastName Andersson -Department HR -InitialPassword $Password -WhatIf
 
 .EXAMPLE
-$Password = ConvertTo-SecureString "P@ssw0rd123!" -AsPlainText -Force
+$Password = Read-Host "Enter initial password" -AsSecureString
 .\New-CompanyUser.ps1 -FirstName David -LastName Berg -Department Finance -InitialPassword $Password -Verbose
 
 .NOTES

@@ -1,0 +1,40 @@
+# Local editor and workspace files
+.vscode/
+.idea/
+*.code-workspace
+
+# PowerShell and Windows artifacts
+*.ps1xml
+*.clixml
+*.psd1.bak
+*.log
+*.etl
+*.evtx
+*.etl.zip
+Transcripts/
+
+# Lab exports and generated reports
+exports/
+reports/
+*.csv
+*.html
+*.json
+*.xml
+
+# Secrets and environment files
+.env
+.env.*
+*.secret
+*.secrets
+secrets/
+
+# Archives and temp files
+*.zip
+*.7z
+*.tmp
+*.bak
+*.old
+
+# OS clutter
+Thumbs.db
+Desktop.ini
