@@ -1,5 +1,11 @@
 # AD IAM Lifecycle Lab
 
+![Status](https://img.shields.io/badge/status-under%20development-orange)
+![Platform](https://img.shields.io/badge/platform-Windows%20Server-0078D6)
+![Directory](https://img.shields.io/badge/directory-Active%20Directory-2E7D32)
+![Automation](https://img.shields.io/badge/automation-PowerShell%207-5391FE)
+![License](https://img.shields.io/badge/license-MIT-blue)
+
 ## Project Overview
 
 This repository contains an enterprise-style lab focused on Active Directory identity lifecycle management in a Windows-based environment. The project is designed to demonstrate practical onboarding and offboarding workflows, group-based access control, PowerShell administration, and security-minded documentation in a simulated organization.
@@ -14,6 +20,24 @@ The goal of the lab is to show how an IT or IAM administrator could build and do
 - least privilege
 - auditability
 - reproducible lab steps
+
+## Current Status
+
+This project is actively under development.
+
+Current progress includes:
+
+- lab architecture, OU, and group strategy documentation
+- onboarding and offboarding workflow documentation
+- PowerShell scripts for user provisioning, deprovisioning, and group membership reporting
+- audit and logging guidance
+- a reproducible lab setup guide
+
+Next phase:
+
+- build the live `corp.local` lab environment
+- validate the scripts against real Active Directory objects
+- capture screenshots, verification output, and lessons learned
 
 ## Lab Architecture
 
