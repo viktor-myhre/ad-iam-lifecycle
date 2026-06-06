@@ -43,6 +43,58 @@ Build a minimal domain environment that supports:
   - test user sign-in
   - test baseline access behavior
 
+## Recommended VM Specs
+
+These are practical starter specs for a small local lab. They are intentionally modest so the environment is realistic but still easy to run on a personal machine.
+
+### DC01
+
+- vCPU: 2
+- RAM: 4 GB minimum, 6-8 GB preferred
+- Disk: 60 GB minimum
+- Network: one lab adapter on an isolated virtual switch or internal lab network
+
+### ADMIN01
+
+- vCPU: 2
+- RAM: 4 GB minimum
+- Disk: 50 GB minimum
+- Network: same lab network as `DC01`
+
+### CLIENT01
+
+- vCPU: 2
+- RAM: 4 GB minimum
+- Disk: 50 GB minimum
+- Network: same lab network as `DC01`
+
+## Networking Recommendation
+
+Decision:
+Use an isolated lab network for the VMs and keep the domain environment separate from the normal home network where practical.
+
+Reason:
+This reduces accidental conflicts with existing devices and makes DNS and domain behavior easier to troubleshoot.
+
+Security impact:
+The lab is easier to contain and reason about, especially when testing account management and administrative behavior.
+
+Operational impact:
+You get a cleaner troubleshooting experience and more repeatable network behavior.
+
+Verification:
+Confirm that the lab machines can reach each other on the lab network and that domain DNS resolution works after promotion.
+
+### Suggested Example
+
+- Lab subnet: `192.168.100.0/24`
+- `DC01`: `192.168.100.10`
+- `ADMIN01`: `192.168.100.20`
+- `CLIENT01`: `192.168.100.30`
+- Preferred DNS for domain-joined machines: `192.168.100.10`
+
+If your virtualization platform uses a different internal range, that is fine. The important part is staying consistent and documenting what you chose.
+
 ## Domain Design
 
 Decision:
@@ -76,12 +128,54 @@ Confirm that all lab systems can resolve and join `corp.local`.
 
 ## Domain Controller Setup
 
+### DC01 Build Checklist
+
+Use this as the practical first-run checklist while building the first server.
+
+1. Create a new Windows Server VM.
+2. Assign 2 vCPU, at least 4 GB RAM, and at least 60 GB disk.
+3. Connect the VM to the isolated lab network.
+4. Install Windows Server and sign in with the local administrator account.
+5. Rename the host to `DC01`.
+6. Configure a static IPv4 address.
+7. Set the preferred DNS server temporarily to the planned DC address or loopback until DNS is installed.
+8. Install Windows updates if practical before promotion.
+9. Install AD DS and DNS.
+10. Promote the server to a new forest named `corp.local`.
+11. Restart the VM after promotion.
+12. Validate domain, forest, and service health.
+13. Record the final IP address, hostname, and domain details in your lab notes.
+
 ### Initial Tasks
 
 - assign a static IP address
 - set the preferred DNS server to itself after DNS is installed
 - rename the host to `DC01`
 - apply Windows updates before promotion if practical
+
+### Suggested Static Network Values
+
+Example only:
+
+- IPv4 address: `192.168.100.10`
+- Prefix length: `24`
+- Default gateway: depends on your virtual lab network design
+- Preferred DNS server after promotion: `127.0.0.1` or `192.168.100.10`
+
+If the lab network has no routed internet access, the gateway may be blank. That is acceptable for a contained domain lab.
+
+Example PowerShell:
+
+```powershell
+Rename-Computer -NewName "DC01" -Restart
+```
+
+After restart, configure a static address if it was not already set through the GUI:
+
+```powershell
+New-NetIPAddress -InterfaceAlias "Ethernet" -IPAddress 192.168.100.10 -PrefixLength 24
+Set-DnsClientServerAddress -InterfaceAlias "Ethernet" -ServerAddresses 127.0.0.1
+```
 
 ### Install Roles
 
@@ -115,6 +209,8 @@ Verification:
 Get-ADDomain
 Get-ADForest
 Get-Service NTDS, DNS
+Resolve-DnsName dc01.corp.local
+dcdiag /v
 ```
 
 ## Administrative Workstation Setup
