@@ -50,11 +50,12 @@ This repository starts by defining the operating model before automation is intr
 - lab architecture documentation
 - OU structure design
 - group naming and access strategy
+- onboarding workflow documentation
+- user provisioning PowerShell script
 - repository structure for scripts, diagrams, screenshots, and lab notes
 
 Planned implementation areas:
 
-- onboarding automation with `New-CompanyUser.ps1`
 - offboarding automation with `Disable-CompanyUser.ps1`
 - group membership reporting
 - compliance and access review checks
