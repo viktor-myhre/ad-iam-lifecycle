@@ -39,7 +39,7 @@ corp.local
 - Windows Server
 - Active Directory Domain Services
 - DNS
-- PowerShell 5.1
+- PowerShell 5.1 and PowerShell 7
 - Git and GitHub
 - Markdown documentation
 
@@ -51,12 +51,13 @@ This repository starts by defining the operating model before automation is intr
 - OU structure design
 - group naming and access strategy
 - onboarding workflow documentation
+- offboarding workflow documentation
 - user provisioning PowerShell script
+- user deprovisioning PowerShell script
 - repository structure for scripts, diagrams, screenshots, and lab notes
 
 Planned implementation areas:
 
-- offboarding automation with `Disable-CompanyUser.ps1`
 - group membership reporting
 - compliance and access review checks
 
@@ -101,7 +102,6 @@ This section will be updated as the lab grows. The expected focus is on how desi
 
 ## Future Improvements
 
-- add onboarding and offboarding PowerShell scripts
 - add audit and logging guidance
 - add privileged access review examples
 - add compliance validation and reporting scripts
