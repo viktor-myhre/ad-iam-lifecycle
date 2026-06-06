@@ -52,13 +52,14 @@ This repository starts by defining the operating model before automation is intr
 - group naming and access strategy
 - onboarding workflow documentation
 - offboarding workflow documentation
+- audit and logging documentation
 - user provisioning PowerShell script
 - user deprovisioning PowerShell script
+- group membership reporting PowerShell script
 - repository structure for scripts, diagrams, screenshots, and lab notes
 
 Planned implementation areas:
 
-- group membership reporting
 - compliance and access review checks
 
 ## Security Considerations
@@ -102,7 +103,6 @@ This section will be updated as the lab grows. The expected focus is on how desi
 
 ## Future Improvements
 
-- add audit and logging guidance
 - add privileged access review examples
 - add compliance validation and reporting scripts
 - add architecture and workflow diagrams
