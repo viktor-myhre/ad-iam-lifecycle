@@ -35,12 +35,15 @@ Current progress includes:
 - initial live lab implementation of `DC01`
 - verified promotion of `corp.local`
 - implemented OU structure and baseline security groups in Active Directory
+- live-validated onboarding workflow with a real test user
+- live-validated group membership reporting
+- live-validated offboarding workflow
 
 Next phase:
 
-- validate the lifecycle scripts against real Active Directory objects
 - add administrative and client workstations to the domain
 - capture screenshots, verification output, and lessons learned
+- decide which sanitized screenshots and artifacts belong in the public repository
 
 ## Lab Architecture
 
@@ -90,6 +93,9 @@ This repository now includes both design documentation and the first verified im
 - verified `corp.local` forest and domain creation
 - implemented OU structure in Active Directory
 - implemented baseline department and privileged groups in Active Directory
+- live-tested `New-CompanyUser.ps1` against the real domain
+- live-tested `Export-GroupMembershipReport.ps1` against the real domain
+- live-tested `Disable-CompanyUser.ps1` against the real domain
 - repository structure for scripts, diagrams, screenshots, and lab notes
 
 Planned implementation areas:
@@ -125,6 +131,7 @@ Example verification tasks for the lab:
 - confirm group membership matches role and department
 - confirm disabled users are moved to the disabled users OU
 - confirm administrative access is assigned through dedicated groups
+- confirm `Export-GroupMembershipReport.ps1` returns expected membership data for baseline groups
 
 ## Screenshots And Diagrams
 
@@ -133,7 +140,7 @@ Planned additions:
 - AD Users and Computers OU view
 - group membership examples
 - onboarding and offboarding workflow diagram
-- sample verification output from PowerShell
+- selected sanitized verification output from PowerShell
 
 ## Lessons Learned
 

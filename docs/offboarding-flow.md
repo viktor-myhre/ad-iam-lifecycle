@@ -90,6 +90,28 @@ The script is expected to:
 - optionally clear manager and department data
 - provide verbose output and verification guidance
 
+## Live Validation Status
+
+The offboarding workflow has been tested successfully in the live `corp.local` lab.
+
+Validated example:
+
+- user offboarded: `alice.andersson`
+- source baseline group removed: `GG_HR_Users`
+- target OU after move: `OU=Disabled Users,OU=Corp,DC=corp,DC=local`
+
+Validation evidence:
+
+- `Get-ADUser -Identity alice.andersson -Properties Enabled, Department, DistinguishedName`
+- `Get-ADPrincipalGroupMembership alice.andersson | Select-Object Name`
+
+Observed result:
+
+- the account was disabled
+- the user object was moved to the `Disabled Users` OU
+- `GG_HR_Users` was removed
+- `Domain Users` remained as the default group membership
+
 ## Verification
 
 Use commands like the following after offboarding:

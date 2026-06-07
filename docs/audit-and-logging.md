@@ -97,6 +97,26 @@ The script is intended to support:
 - export of privileged groups only
 - review of user identity details alongside membership data
 
+## Live Validation Status
+
+The reporting workflow has been tested successfully in the live `corp.local` lab.
+
+Validated example:
+
+```powershell
+.\Export-GroupMembershipReport.ps1 -GroupName GG_HR_Users -Verbose
+```
+
+Observed result:
+
+- the script returned membership data for `GG_HR_Users`
+- the report included `alice.andersson`
+- the output included `SamAccountName`, `Department`, `Enabled`, and `DistinguishedName`
+
+Validation note:
+
+During live testing, a bug was identified in the report mode selection logic for the `-GroupName` parameter set. The script was corrected so the selected parameter set is resolved from the parent script scope before group collection begins.
+
 ## Verification
 
 Use reporting and verification commands such as:

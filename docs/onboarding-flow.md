@@ -93,6 +93,29 @@ The script is expected to:
 - add the user to the baseline group
 - provide verbose output and verification guidance
 
+## Live Validation Status
+
+The onboarding workflow has been tested successfully in the live `corp.local` lab.
+
+Validated example:
+
+- user created: `alice.andersson`
+- department: `HR`
+- target OU: `OU=HR,OU=Users,OU=Corp,DC=corp,DC=local`
+- baseline group: `GG_HR_Users`
+
+Validation evidence:
+
+- `Get-ADUser -Identity alice.andersson -Properties Department, Enabled, DistinguishedName`
+- `Get-ADPrincipalGroupMembership alice.andersson | Select-Object Name`
+
+Observed result:
+
+- the account was created as enabled
+- the `Department` attribute was set to `HR`
+- the user object was placed in the expected HR OU
+- the user was added to `GG_HR_Users`
+
 ## Verification
 
 Use commands like the following after onboarding:

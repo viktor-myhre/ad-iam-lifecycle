@@ -55,6 +55,7 @@ param(
 begin {
     Set-StrictMode -Version Latest
     $ErrorActionPreference = 'Stop'
+    $selectedParameterSet = $PSCmdlet.ParameterSetName
 
     try {
         Import-Module ActiveDirectory -ErrorAction Stop
@@ -78,7 +79,7 @@ begin {
         [CmdletBinding()]
         param()
 
-        switch ($PSCmdlet.ParameterSetName) {
+        switch ($selectedParameterSet) {
             'SpecificGroup' {
                 return @($GroupName)
             }
