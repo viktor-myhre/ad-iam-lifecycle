@@ -32,11 +32,14 @@ Current progress includes:
 - PowerShell scripts for user provisioning, deprovisioning, and group membership reporting
 - audit and logging guidance
 - a reproducible lab setup guide
+- initial live lab implementation of `DC01`
+- verified promotion of `corp.local`
+- implemented OU structure and baseline security groups in Active Directory
 
 Next phase:
 
-- build the live `corp.local` lab environment
-- validate the scripts against real Active Directory objects
+- validate the lifecycle scripts against real Active Directory objects
+- add administrative and client workstations to the domain
 - capture screenshots, verification output, and lessons learned
 
 ## Lab Architecture
@@ -69,7 +72,7 @@ corp.local
 
 ## What Was Implemented
 
-This repository starts by defining the operating model before automation is introduced.
+This repository now includes both design documentation and the first verified implementation milestone in the live lab.
 
 - lab architecture documentation
 - OU structure design
@@ -81,6 +84,12 @@ This repository starts by defining the operating model before automation is intr
 - user provisioning PowerShell script
 - user deprovisioning PowerShell script
 - group membership reporting PowerShell script
+- VMware-based `DC01` build for the `corp.local` domain
+- static domain controller network configuration
+- Active Directory Domain Services and DNS installation
+- verified `corp.local` forest and domain creation
+- implemented OU structure in Active Directory
+- implemented baseline department and privileged groups in Active Directory
 - repository structure for scripts, diagrams, screenshots, and lab notes
 
 Planned implementation areas:
@@ -101,12 +110,16 @@ Planned implementation areas:
 2. Create the example domain `corp.local`.
 3. Implement the OU structure documented in [docs/ou-structure.md](docs/ou-structure.md).
 4. Create security groups using the naming strategy in [docs/group-strategy.md](docs/group-strategy.md).
-5. Validate account lifecycle steps against the workflows that will be documented and scripted in this repository.
+5. Follow the detailed build notes in [docs/lab-setup.md](docs/lab-setup.md).
+6. Validate account lifecycle steps against the documented workflows and PowerShell scripts in this repository.
 
 ## Verification
 
 Example verification tasks for the lab:
 
+- confirm `Get-ADDomain` returns `corp.local`
+- confirm `Get-ADForest` returns `corp.local`
+- confirm `NTDS` and `DNS` services are running on `DC01`
 - confirm users are created in the correct OU
 - confirm department attributes are populated
 - confirm group membership matches role and department

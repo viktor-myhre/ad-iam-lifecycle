@@ -4,6 +4,28 @@
 
 This document defines the planned organizational unit layout for the `corp.local` lab. The goal is to keep administration clear, support delegated management where appropriate, and separate active and disabled identities.
 
+## Implementation Status
+
+The OU structure has been implemented in the live `corp.local` lab on `DC01` and verified with:
+
+```powershell
+Get-ADOrganizationalUnit -Filter * | Select-Object Name, DistinguishedName
+```
+
+Verified OUs currently present:
+
+- `Corp`
+- `Users`
+- `IT`
+- `HR`
+- `Finance`
+- `Operations`
+- `Groups`
+- `Workstations`
+- `Servers`
+- `Admin Accounts`
+- `Disabled Users`
+
 ## Planned OU Layout
 
 ```text

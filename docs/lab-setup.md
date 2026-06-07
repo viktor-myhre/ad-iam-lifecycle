@@ -4,6 +4,32 @@
 
 This document provides a reproducible build guide for the `corp.local` Active Directory lab. The goal is to create a small, realistic Windows environment that matches the repository design and supports live validation of the onboarding, offboarding, and reporting workflows.
 
+## Current Implementation Status
+
+The initial domain controller phase has been completed and verified in the live lab.
+
+Completed on `DC01`:
+
+- VMware Workstation Pro VM created for `DC01`
+- Windows Server 2022 Standard Evaluation installed with Desktop Experience
+- host-only lab networking used for the initial domain build
+- static IPv4 address configured as `192.168.100.10/24`
+- DNS client configured to use `127.0.0.1`
+- Active Directory Domain Services and DNS installed
+- new forest and domain created for `corp.local`
+- OU structure implemented under `OU=Corp,DC=corp,DC=local`
+- baseline department and privileged groups created in `OU=Groups,OU=Corp,DC=corp,DC=local`
+
+Verification completed with:
+
+```powershell
+Get-ADDomain
+Get-ADForest
+Get-Service NTDS, DNS
+Get-ADOrganizationalUnit -Filter * | Select-Object Name, DistinguishedName
+Get-ADGroup -Filter "Name -like 'GG_*'" | Select-Object Name, DistinguishedName
+```
+
 ## Lab Goal
 
 Build a minimal domain environment that supports:
@@ -19,7 +45,7 @@ Build a minimal domain environment that supports:
 
 ### Domain Controller
 
-- Operating system: Windows Server
+- Operating system: Windows Server 2022 Standard Evaluation (Desktop Experience)
 - Suggested hostname: `DC01`
 - Planned roles:
   - Active Directory Domain Services
@@ -162,6 +188,13 @@ Example only:
 - Default gateway: depends on your virtual lab network design
 - Preferred DNS server after promotion: `127.0.0.1` or `192.168.100.10`
 
+Implemented in the current lab:
+
+- IPv4 address: `192.168.100.10`
+- Prefix length: `24`
+- Preferred DNS server: `127.0.0.1`
+- Network type: host-only
+
 If the lab network has no routed internet access, the gateway may be blank. That is acceptable for a contained domain lab.
 
 Example PowerShell:
@@ -212,6 +245,12 @@ Get-Service NTDS, DNS
 Resolve-DnsName dc01.corp.local
 dcdiag /v
 ```
+
+Live validation result:
+
+- `Get-ADDomain` returned `corp.local`
+- `Get-ADForest` returned `corp.local`
+- `Get-Service NTDS, DNS` returned both services as `Running`
 
 ## Administrative Workstation Setup
 
@@ -292,6 +331,20 @@ Verification:
 Get-ADOrganizationalUnit -Filter * | Select-Object Name, DistinguishedName
 ```
 
+Live validation result:
+
+- `Corp`
+- `Users`
+- `IT`
+- `HR`
+- `Finance`
+- `Operations`
+- `Groups`
+- `Workstations`
+- `Servers`
+- `Admin Accounts`
+- `Disabled Users`
+
 ## Group Creation
 
 Build the baseline groups defined in [group-strategy.md](group-strategy.md).
@@ -319,6 +372,14 @@ Verification:
 ```powershell
 Get-ADGroup -Filter "Name -like 'GG_*'" | Select-Object Name, DistinguishedName
 ```
+
+Live validation result:
+
+- `GG_HR_Users`
+- `GG_Finance_Users`
+- `GG_IT_Users`
+- `GG_Operations_Users`
+- `GG_IT_Admins`
 
 ## Script Readiness Check
 

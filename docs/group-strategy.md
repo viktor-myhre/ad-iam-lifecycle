@@ -4,6 +4,22 @@
 
 This lab uses group-based access control instead of direct user permissions. The goal is to model a simple, explainable approach that demonstrates least privilege and supports repeatable onboarding and offboarding.
 
+## Implementation Status
+
+The baseline security groups have been created in the live `corp.local` lab and verified with:
+
+```powershell
+Get-ADGroup -Filter "Name -like 'GG_*'" | Select-Object Name, DistinguishedName
+```
+
+Verified groups currently present:
+
+- `GG_HR_Users`
+- `GG_Finance_Users`
+- `GG_IT_Users`
+- `GG_Operations_Users`
+- `GG_IT_Admins`
+
 ## Naming Convention
 
 The planned naming convention is:
